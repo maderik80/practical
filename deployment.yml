@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: practical
+  name: practical
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: practical
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: practical
+    spec:
+      containers:
+      - image: mongo
+        name: mongo
+        resources: {}
+        ports:
+        - containerPort: 27017
+      - image: 650641525279.dkr.ecr.us-west-2.amazonaws.com/dev-repo:latest
+        name: swimlane
+        env:
+        - name: MONGODB_URL
+          value: "mongodb://localhost:27017/database"
+        resources: {}
+        ports:
+        - containerPort: 3000
+status: {}
