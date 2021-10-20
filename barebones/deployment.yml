@@ -24,7 +24,10 @@ spec:
         resources: {}
         ports:
         - containerPort: 27017
-      - image: 650641525279.dkr.ecr.us-west-2.amazonaws.com/dev-repo:latest
+        readinessProbe:
+          tcpSocket:
+            port: 27017
+      - image: 650641525279.dkr.ecr.us-east-2.amazonaws.com/dev-repo:latest
         name: swimlane
         env:
         - name: MONGODB_URL
@@ -32,4 +35,7 @@ spec:
         resources: {}
         ports:
         - containerPort: 3000
+        readinessProbe:
+          tcpSocket:
+            port: 3000
 status: {}
